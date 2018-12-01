@@ -37,8 +37,9 @@ class TopicModelling:
         self.doc_term_matrix = [self.id2word.doc2bow(doc) for doc in self.corpus]
 
     def extract_topics(self, x):
-        x = x[0][1].split('\"')
-        return x[1]
+        # x = x[0][1].split('\"')
+        # return x[1]
+        return x
 
     def get_topics(self):
         ldamodel = LDA(self.doc_term_matrix, num_topics=3, id2word=self.id2word, passes=self.passes, iterations=self.iterations)
