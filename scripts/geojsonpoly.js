@@ -10,7 +10,7 @@ fs.readFile('../parsed_data/KVARTALITE.geojson', "utf8", (err,data)=>{
         //console.log(feature.properties.RegName)
         var res = feature.geometry.coordinates[0][0].map( e => transform.forward([e[0], e[1]]))
         feature.geometry.coordinates = [[res]]
-        feature.weight = "";
+        feature.properties.weight = "";
         //console.log(feature);
         //console.log(feature.geometry.coordinates[0][0])
     })
