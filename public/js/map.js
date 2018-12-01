@@ -11,6 +11,7 @@
           center: {lat: 42.695252, lng: 23.328843},
           mapTypeId: 'roadmap'
         });
+ 
       }
       
       function toggleHeatmap() {
@@ -18,6 +19,9 @@
       }
       function changeHeatmap(id) {
         socket.emit('heatmap-change', id)
+      }
+      function changePolygon(id) {
+        socket.emit('polygon-change', id)
       }
       function changeGradient() {
         var gradient = [
@@ -46,6 +50,17 @@
       function changeOpacity() {
         heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
       }
+      socket.on('setGsonData', function (data) {
+        map.data.addGeoJson(data);
+        map.data.setStyle(function (feature) {
+          return {
+              fillColor: ,
+              strokeWeight: 1
+          };
+        });
+
+      })
+
       socket.on('setData', function (data) {
         let result = []
         data.map((elem)=>{result.push({location: new google.maps.LatLng(elem.lat,elem.lng), weight: elem.weight})})
