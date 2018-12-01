@@ -54,7 +54,7 @@
         map.data.addGeoJson(data);
         map.data.setStyle(function (feature) {
           return {
-              fillColor: ,
+              fillColor: "red",
               strokeWeight: 1
           };
         });
