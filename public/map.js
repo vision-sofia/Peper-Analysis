@@ -11,21 +11,14 @@
           center: {lat: 42.695252, lng: 23.328843},
           mapTypeId: 'roadmap'
         });
-
-        heatmap = new google.maps.visualization.HeatmapLayer({
-          data: null,
-          map: map,
-          radius: 25  
-        });
       }
-
+      
       function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
       }
       function changeHeatmap(id) {
         socket.emit('heatmap-change', id)
       }
-
       function changeGradient() {
         var gradient = [
           'rgba(0, 255, 255, 0)',
@@ -54,11 +47,13 @@
         heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
       }
       socket.on('setData', function (data) {
-        console.log(data);
-        console.log(heatmap);
-        setData(data)
+        let result = []
+        data.map((elem)=>{result.push({location: new google.maps.LatLng(elem.lat,elem.lng), weight: elem.weight})})
+        if(heatmap)
+          heatmap.setMap(null)
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: result,
+          map: map,
+          radius: 25  
+        });
       })
-
-      function setData(data){
-        heatmap.data = data;
-      }
