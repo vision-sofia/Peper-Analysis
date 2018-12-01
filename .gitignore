@@ -118,7 +118,7 @@ dmypy.json
 .vscode
 
 # Big Data
-/data
+/data/boston-airbnb-open-data
 
 # Mac OSX
 .DS_Store
