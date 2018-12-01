@@ -12,8 +12,9 @@ pandas = "*"
 seaborn = "*"
 nltk = "*"
 textblob = "*"
-jupyter = "*"
+gensim = "*"
 scikit-learn = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.7"
