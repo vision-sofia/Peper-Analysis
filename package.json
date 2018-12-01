@@ -18,6 +18,8 @@
   "homepage": "https://github.com/kall0m/Peper-Analysis#readme",
   "dependencies": {
     "csv-parse": "^4.0.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "node-geocoder": "^3.22.0",
+    "transform-coordinates": "^0.1.0"
   }
 }
