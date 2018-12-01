@@ -16,12 +16,15 @@ def extract_tags(data):
 
     tags = []
     for phrase in raw_data:
+        skip = False
         res = ''
         for word in phrase:
-            if "VB" not in word[1] and "NN" not in word[1]:
+            if word[0] == "able" and "JJ" in word[1]:
+                skip = True
+            else:
                 res += word[0] + ' '
 
-        if len(res) > 0:
+        if len(res) > 0 and not skip:
             tags.append(res[:-1])
 
     return tags
@@ -30,7 +33,7 @@ def get_cat_tags(a, verbose=False):
     if verbose:
         print()
         print('-'*100)
-        print("\tRunning `get_clf_tags`...")
+        print("\tRunning `get_cat_tags`...")
         print('-'*100)
 
     clf_tag_parser = RegexpParser(
@@ -38,8 +41,9 @@ def get_cat_tags(a, verbose=False):
             (<NN>|<NNS>|<NNP>|<NNPS>)?\
             ((<VB>|<VBD>|<VBG>|<VBN>|<VBP>|<VBZ>)<RB>?)+\
             <DT>?\
-            (<JJ>|<JJR>|<JJS>)\
+            (<JJ>|<JJR>|<JJS>)+\
             (<CC>(<JJ>|<JJR>|<JJS>))?\
+            (<NN>|<NNS>|<NNP>|<NNPS>)?\
         }"
     )
 

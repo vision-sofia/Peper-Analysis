@@ -11,6 +11,7 @@ numpy = "*"
 pandas = "*"
 seaborn = "*"
 nltk = "*"
+spacy = "*"
 textblob = "*"
 jupyter = "*"
 
