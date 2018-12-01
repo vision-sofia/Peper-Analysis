@@ -13,8 +13,9 @@ __all__ = [
 LDA = gensim.models.ldamodel.LdaModel
 
 class TopicModelling:
-    def __init__(self, text, passes=400, iterations=800):
+    def __init__(self, text, num_topics=3, passes=400, iterations=800):
         self.text = text
+        self.num_topics = num_topics
         self.passes = passes
         self.iterations = iterations
 
@@ -37,11 +38,14 @@ class TopicModelling:
         self.doc_term_matrix = [self.id2word.doc2bow(doc) for doc in self.corpus]
 
     def extract_topics(self, x):
-        # x = x[0][1].split('\"')
-        # return x[1]
-        return x
+        pass
 
     def get_topics(self):
-        ldamodel = LDA(self.doc_term_matrix, num_topics=3, id2word=self.id2word, passes=self.passes, iterations=self.iterations)
+        ldamodel = LDA(self.doc_term_matrix, num_topics=self.num_topics, id2word=self.id2word,
+            passes=self.passes, iterations=self.iterations)
+
         print("Modelling...")
-        return self.extract_topics(ldamodel.print_topics(num_topics=3, num_words=3))
+        return [
+            [self.id2word[pair[0]] for pair in ldamodel.get_topic_terms(i, topn=3)]
+            for i in range(self.num_topics)
+        ]
