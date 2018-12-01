@@ -18,7 +18,8 @@ def extract_tags(data):
     for phrase in raw_data:
         res = ''
         for word in phrase:
-            res += word[0] + ' '
+            if "VB" not in word[1] and "NN" not in word[1]:
+                res += word[0] + ' '
 
         if len(res) > 0:
             tags.append(res[:-1])
@@ -34,9 +35,11 @@ def get_cat_tags(a, verbose=False):
 
     clf_tag_parser = RegexpParser(
         "CTAG: {\
-            (<NN>|<NNS>|<NNP>|<NNPS>)\
+            (<NN>|<NNS>|<NNP>|<NNPS>)?\
             ((<VB>|<VBD>|<VBG>|<VBN>|<VBP>|<VBZ>)<RB>?)+\
+            <DT>?\
             (<JJ>|<JJR>|<JJS>)\
+            (<CC>(<JJ>|<JJR>|<JJS>))?\
         }"
     )
 
