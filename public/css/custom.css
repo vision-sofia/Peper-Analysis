@@ -1,0 +1,48 @@
+/***************************
+Add your custom styles below
+****************************/
+
+.lead {
+	font-size: 20px;
+}
+
+body {
+	background: #303030;
+}
+
+.page-border {
+  margin: 20px;
+  background: #303030;
+}
+
+.logo {
+	max-height: 100% !important;
+}
+
+#map-section {
+	margin: 20px 0;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
+}
+
+.feature {
+	/*display: flex;
+	justify-content: center;*/
+}
+
+.filters {
+	height: 300px;
+	overflow: auto;
+}
+
+.filters li {
+	margin-bottom: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}

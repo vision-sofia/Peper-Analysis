@@ -1,60 +1,171 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Heatmaps</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #floating-panel {
-        background-color: #fff;
-        border: 1px solid #999;
-        left: 25%;
-        padding: 5px;
-        position: absolute;
-        top: 10px;
-        z-index: 5;
-      }
-    </style>
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script src="map.js"></script>
-  </head>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Peper Analysis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/socicon.css" rel="stylesheet" type="text/css" media="all">
+        <link href="css/iconsmind.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="css/interface-icons.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="css/theme-darkred.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<script src="js/map.js"></script>
+    </head>
+    <body data-reveal-selectors="section:not(.masonry):not(:first-of-type):not(.parallax)">
+		<div class="page-border">
+			<div class="nav-container">
+				<nav>
+					<div class="nav-bar bg--dark" data-fixed-at="700">
+						<div class="nav-module logo-module left">
+							<a href="#">
+								<img alt="logo" class="logo logo-dark" src="img/logo11.png">
+								<img alt="logo" class="logo logo-light" src="img/logo11.png">
+							</a>
+						</div>
+						<div class="nav-module menu-module">
+							<ul class="menu">
+								<li>
+									<a href="#mapka">Mapka</a>
+								</li>
+								<li>
+									<a href="#about">About</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="nav-mobile-toggle visible-sm visible-xs">
+						<i class="icon-Align-JustifyAll icon icon--sm"></i>
+					</div>
+				</nav>
+			</div>
 
-  <body>
-    
-    <div id="floating-panel">
-      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-      <button onclick="changeGradient()">Change gradient</button>
-      <button onclick="changeRadius()">Change radius</button>
-      <button onclick="changeOpacity()">Change opacity</button>
-      <button id="1" onclick="changeHeatmap(this.id)">1</button>
-      <button id="2" onclick="changeHeatmap(this.id)">2</button>
-    </div>
-    <div id="map"></div>>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxn2Fab9g6ks--ZZAnPxm68_X7ekrACeU&libraries=visualization&callback=initMap">
-    </script>
-  </body>
+			<div class="main-container">
+				<a name="mapka"></a>
+				<section id="map-section" class="imageblock bg--dark">
+					<div class="imageblock__content col-sm-8 col-md-9 pos-right">
+						<div id="map"></div>
+					</div>
+					<div class="col-sm-4 col-md-3">
+						<div class="feature feature-1 service-1 text-center">
+							<h4>Filters</h4>
+							<ul class="filters">							
+								<li>
+									<a class="btn btn--primary" href="#" onclick="toggleHeatmap()">
+										<span class="btn__text">
+											Toggle Heatmap
+										</span>
+									</a>
+								</li>
+								
+								<li>
+									<a class="btn btn--primary" href="#" onclick="changeGradient()">
+										<span class="btn__text">
+											Change gradient
+										</span>
+									</a>
+								</li>
+								
+								<li>
+									<a class="btn btn--primary" href="#" onclick="changeRadius()">
+										<span class="btn__text">
+											Change radius
+										</span>
+									</a>
+								</li>
+								
+								<li>
+									<a class="btn btn--primary" href="#" onclick="changeOpacity()">
+										<span class="btn__text">
+											Change opacity
+										</span>
+									</a>
+								</li>
+								
+								<li>
+									<a id="1" class="btn btn--primary" href="#" onclick="changeHeatmap(this.id)">
+										<span class="btn__text">
+											1
+										</span>
+									</a>
+								</li>
+								
+								<li>
+									<a id="2" class="btn btn--primary" href="#" onclick="changeHeatmap(this.id)">
+										<span class="btn__text">
+											2
+										</span>
+									</a>
+								</li>
+								
+								<em>Gyms</em>
+								<li>
+									<a class="btn btn--primary" href="#">
+										<span class="btn__text">
+											<i class="icon icon-Fingerprint-2"></i>
+											Show sth
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<a name="about"></a>
+				<section class="bg--dark imagebg parallax space--sm" data-overlay="8">
+					<div class="background-image-holder">
+						<img alt="background" src="img/hero14.jpg">
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-7 col-sm-9">
+								<h2>What is Peper Analysis?</h2>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="feature text-justify">
+									<p>An interactive map where you can search the most visited places in Sofia.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				
+				<footer class="footer-3 bg--dark text-center-xs text-center">
+					<div class="col-sm-3">
+						<img alt="logo" class="logo" src="img/logo11.png">
+					</div>
+					<div class="col-sm-6 text-center">
+						<ul class="footer__navigation">
+							<li>
+								<a href="#">About</a>
+							</li>
+						</ul>
+						<span class="type--fine-print">© Copyright <span class="update-year">2018</span> Peper Analysis</span>
+					</div>
+					<div class="col-sm-3 text-right text-center-xs">
+						<ul class="social-list">
+							<li>
+								<a href="https://github.com/kall0m/Peper-Analysis" target="_blank"><i class="socicon-github"></i></a>
+							</li>
+						</ul>
+					</div>
+				</footer>
+			</div>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/scrollreveal.min.js"></script>
+        <script src="js/parallax.js"></script>
+        <script src="js/scripts.js"></script>
+		<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxn2Fab9g6ks--ZZAnPxm68_X7ekrACeU&libraries=visualization&callback=initMap">
+		</script>
+    </body>
 </html>
