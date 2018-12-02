@@ -20,6 +20,7 @@
     "csv-parse": "^4.0.1",
     "express": "^4.16.4",
     "node-geocoder": "^3.22.0",
+    "point-in-geopolygon": "^1.0.1",
     "socket.io": "^2.2.0",
     "transform-coordinates": "^0.1.0"
   }
