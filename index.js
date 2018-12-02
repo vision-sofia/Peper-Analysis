@@ -30,6 +30,7 @@ io.on('connection', function(socket) {
         let input = ''
         process.on('close', (code) => {
             let result = {}
+            let counter = {}
             let max = (n , m)  => {return n > m ? n : m}
             let geoJson = JSON.parse(fs.readFileSync('./parsed_data/text5.geojson', 'utf-8'))
             let points = JSON.parse(input.toString())
@@ -41,10 +42,12 @@ io.on('connection', function(socket) {
                             
                             if(result[feature.properties.RegName]){
                                 result[feature.properties.RegName] = result[feature.properties.RegName]+point.weight
+                                counter[feature.properties.RegName]++
                             }else{
                                 result[feature.properties.RegName] = point.weight
+                                counter[feature.properties.RegName] = 0
                             }
-                            c_max = max(result[feature.properties.RegName],c_max)
+                            //c_max = max(result[feature.properties.RegName],c_max)
                             //console.log([point.lng,point.lat] + " is in " + feature.properties.RegName)
                         }
                     }else{
@@ -54,7 +57,10 @@ io.on('connection', function(socket) {
 
             }
             for(let el in result) {
-                result[el] /= c_max
+                c_max = max((counter[el] == 0 ? 0 : result[el] / counter[el]), c_max)
+            }
+            for(let el in result) {
+                result[el] /= (c_max * counter[el])
             }
             socket.emit('setGsonData', result)
 

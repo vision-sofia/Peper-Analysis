@@ -35,8 +35,10 @@ def analyse_by(user_input, loc):
 
 if __name__ == "__main__":
     user_input = sys.argv[1:]
-    text = ' '.join(user_input)
-    tags = get_search_tags(text, verbose=False)
+    if len(user_input) <= 3:
+        tags = user_input
+    else:
+        tags = get_search_tags(' '.join(user_input), verbose=False)        
     # print("Search Tags:", tags)
 
     json_objects = []

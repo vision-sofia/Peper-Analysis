@@ -64,14 +64,6 @@
 							<h3>Filters</h3>
 							<ul class="filters">							
 								<li>
-									<a class="btn btn--primary" onclick="toggleHeatmap()">
-										<span class="btn__text">
-											Toggle Heatmap
-										</span>
-									</a>
-								</li>
-								
-								<li>
 									<a class="btn btn--primary" onclick="changeGradient()">
 										<span class="btn__text">
 											Change gradient
@@ -83,6 +75,13 @@
 									<a class="btn btn--primary" onclick="changeOpacity()">
 										<span class="btn__text">
 											Change opacity
+										</span>
+									</a>
+								</li>
+								<li>
+									<a id="4" class="btn btn--primary" onclick="changePolygon(this.id)">
+										<span class="btn__text">
+											Sports
 										</span>
 									</a>
 								</li>
@@ -100,15 +99,13 @@
 										</span>
 									</a>
 								</li>
-								
 								<li>
-									<a id="4" class="btn btn--primary" onclick="changePolygon(this.id)">
+									<a class="btn btn--primary" onclick="toggleHeatmap()">
 										<span class="btn__text">
-											Sports
+											Toggle Heatmap
 										</span>
 									</a>
-								</li>
-								
+								</li>	
 							</ul>
 						</div>
 						<div id="load" class="load pull-right"></div>
@@ -168,7 +165,7 @@
 		<script>
 				console.log('asd')
 				document.getElementById('but').addEventListener("click", (e)=>{
-
+						document.getElementById('load').style.visibility = "visible";
 						e.preventDefault()
 						console.log(document.getElementById('sbox').value)
 						socket.emit('request_analysis', document.getElementById('sbox').value)
