@@ -1,3 +1,6 @@
+from math import sqrt
+from collections import Counter
+
 import nltk
 from nltk.corpus import wordnet as wn
 
@@ -25,9 +28,6 @@ def noun_syncheck(wordA, wordB):
 
 
 def word2vec(word):
-    from collections import Counter
-    from math import sqrt
-
     cw = Counter(word)
     sw = set(cw)
     lw = sqrt(sum(c*c for c in cw.values()))

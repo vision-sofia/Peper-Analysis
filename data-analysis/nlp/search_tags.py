@@ -6,7 +6,7 @@ from nltk.tag import pos_tag
 
 __all__ = [
     "extract_tags",
-    "get_cat_tags",
+    "get_search_tags",
 ]
 
 
@@ -19,17 +19,14 @@ def extract_tags(data):
         skip = False
         res = ''
         for word in phrase:
-            if word[0] == "able" and "JJ" in word[1]:
-                skip = True
-            else:
-                res += word[0] + ' '
+            res += word[0] + ' '
 
         if len(res) > 0 and not skip:
             tags.append(res[:-1])
 
     return tags
 
-def get_cat_tags(a, verbose=False):
+def get_search_tags(a, verbose=False):
     if verbose:
         print()
         print('-'*100)
@@ -37,10 +34,8 @@ def get_cat_tags(a, verbose=False):
         print('-'*100)
 
     clf_tag_parser = RegexpParser(
-        "CTAG: {\
+        "STAG: {\
             (<NN>|<NNS>|<NNP>|<NNPS>)?\
-            ((<VB>|<VBD>|<VBG>|<VBN>|<VBP>|<VBZ>)<RB>?)+\
-            <DT>?\
             (<JJ>|<JJR>|<JJS>)+\
             (<CC>(<JJ>|<JJR>|<JJS>))?\
             (<NN>|<NNS>|<NNP>|<NNPS>)?\
@@ -53,6 +48,6 @@ def get_cat_tags(a, verbose=False):
 
     data = clf_tag_parser.parse(pos_tags)
     if verbose:
-        print("Matched Categorical Tags:", data)
+        print("Matched Search Tags:", data)
 
     return extract_tags(data)
