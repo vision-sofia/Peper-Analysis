@@ -55,6 +55,7 @@
       }
       function changePolygon(id) {
         socket.emit('polygon-change', id)
+        document.getElementById('load').style.visibility = "visible";
       }
       function changeGradient() {
         gradient = gradient == 120 ? 0 : 120;
@@ -79,6 +80,8 @@
             }
           })
         }
+        console.log(document.getElementById('load'))
+        document.getElementById('load').style.visibility = "hidden";
       })
 
       socket.on('intiPolygon', function (data){

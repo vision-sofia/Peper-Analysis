@@ -50,7 +50,8 @@
 				<a name="mapka"></a>
 				<section class="imageblock bg--dark">
 					<div id="map-holder" class="imageblock__content col-sm-8 col-md-9 pos-right">
-						<div id="map"></div>
+						<div id="map">
+						</div> 
 					</div>
 					<div class="col-sm-4 col-md-3">
 						<div id="search">
@@ -86,16 +87,16 @@
 									</a>
 								</li>
 								<li>
-									<a id="5" class="btn btn--primary" href="#" onclick="search()">
+									<a id="6" class="btn btn--primary" onclick="changePolygon(this.id)">
 										<span class="btn__text">
-											5
+											AirBnB
 										</span>
 									</a>
 								</li>
 								<li>
 									<a id="3" class="btn btn--primary" onclick="changePolygon(this.id)">
 										<span class="btn__text">
-											3
+											Population density
 										</span>
 									</a>
 								</li>
@@ -103,13 +104,14 @@
 								<li>
 									<a id="4" class="btn btn--primary" onclick="changePolygon(this.id)">
 										<span class="btn__text">
-											4
+											Sports
 										</span>
 									</a>
 								</li>
 								
 							</ul>
 						</div>
+						<div id="load" class="load pull-right"></div>
 					</div>
 				</section>
 				
