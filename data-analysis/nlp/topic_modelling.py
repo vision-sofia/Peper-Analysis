@@ -44,7 +44,7 @@ class TopicModelling:
         ldamodel = LDA(self.doc_term_matrix, num_topics=self.num_topics, id2word=self.id2word,
             passes=self.passes, iterations=self.iterations)
 
-        print("Modelling...")
+        # print("Modelling...")
         return [
             [self.id2word[pair[0]] for pair in ldamodel.get_topic_terms(i, topn=3)]
             for i in range(self.num_topics)

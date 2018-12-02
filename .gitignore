@@ -125,3 +125,7 @@ dmypy.json
 
 # Node Modules
 node_modules
+
+# Google's word2vec
+/data/GoogleNews-vectors-negative300.bin.gz
+/data/GoogleNews-vectors-negative300.bin
