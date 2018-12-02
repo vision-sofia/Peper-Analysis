@@ -42,7 +42,7 @@
           strokeWeight: outlineWeight,
           strokeColor: '#fff',
           zIndex: zIndex,
-          fillColor: 'hsl(' + (delta * 180 + 180 + gradient) + ',' + 100 + '%,' + 50 + '%)',
+          fillColor: 'hsl(' + ((1 - delta) *120 - gradient) + ',' + 100 + '%,' + 50 + '%)',
           fillOpacity: f_opacity,
           visible: heatmap_vissible
         };
@@ -57,12 +57,12 @@
         socket.emit('polygon-change', id)
       }
       function changeGradient() {
-        gradient = gradient == 180 ? 0 : 180;
+        gradient = gradient == 120 ? 0 : 120;
         map.data.setStyle(styleFeature);
       }
 
       function changeOpacity() {
-        opacity = opacity == 0.2 ? 0.75 : 0.2;
+        opacity = opacity == 0.4 ? 0.75 : 0.4;
         map.data.setStyle(styleFeature);
       }
       socket.on('setGsonData', function (data) {
