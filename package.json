@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kall0m/Peper-Analysis#readme",
   "dependencies": {
+    "child_process": "^1.0.2",
     "csv-parse": "^4.0.1",
     "express": "^4.16.4",
     "node-geocoder": "^3.22.0",
