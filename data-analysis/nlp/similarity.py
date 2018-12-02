@@ -15,19 +15,12 @@ __all__ = [
     "calc_similarity",
 ]
 
-
-with open('../data/review_vocab.json', 'r') as f:
-    cnt = f.read()
-    vocab = set(json.loads(cnt))
-
 words = {}
 i = 0
-with open('../data/glove.840B.300d.txt', 'r') as f:
+with open('../data/glove_review_vocab.txt', 'r') as f:
     for line in f:
         splitted  = line.split()
         word = splitted[0]
-        if(word not in vocab):
-            continue
         try:
             vec = np.array(list(map(float, splitted[1:])))
             words[word] = vec            
