@@ -1,5 +1,7 @@
 
-      var map, heatmap;
+      var map;
+      var heatmap_vissible = true;
+      var opacity = 0.75, gradient = 0;
       var socket = io();  
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -8,6 +10,7 @@
           mapTypeId: 'roadmap'
         });
         map.data.setStyle(styleFeature);
+        socket.emit('map-loaded')
         //map.data.addListener('mouseover', mouseInToRegion);
         //map.data.addListener('mouseout', mouseOutOfRegion);
 
@@ -21,11 +24,11 @@
         
 
         // determine whether to show this shape or not
-        var showRun = 0.75;
+        var f_opacity = opacity;
         if (feature.getProperty('weight') == null ||
             isNaN(feature.getProperty('weight')) || 
             feature.getProperty('weight') == "") {
-          showRun = 0.1;
+          f_opacity = 0.1;
           delta = 0;
         }
 
@@ -38,9 +41,9 @@
           strokeWeight: outlineWeight,
           strokeColor: '#fff',
           zIndex: zIndex,
-          fillColor: 'hsl(' + (delta * 180 + 180) + ',' + 100 + '%,' + 50 + '%)',
-          fillOpacity: showRun,
-          //visible: showRow
+          fillColor: 'hsl(' + (delta * 180 + 180 + gradient) + ',' + 100 + '%,' + 50 + '%)',
+          fillOpacity: f_opacity,
+          visible: heatmap_vissible
         };
 
       }
@@ -48,40 +51,20 @@
         socket.emit('request_analysis', "friendly neighbourhood")
       }
       function toggleHeatmap() {
-        heatmap.setMap(heatmap.getMap() ? null : map);
-      }
-      function changeHeatmap(id) {
-        socket.emit('heatmap-change', id)
+        heatmap_vissible ^= 1;
+        map.data.setStyle(styleFeature);
       }
       function changePolygon(id) {
         socket.emit('polygon-change', id)
       }
       function changeGradient() {
-        var gradient = [
-          'rgba(0, 255, 255, 0)',
-          'rgba(0, 255, 255, 1)',
-          'rgba(0, 191, 255, 1)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 63, 255, 1)',
-          'rgba(0, 0, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 191, 1)',
-          'rgba(0, 0, 159, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(63, 0, 91, 1)',
-          'rgba(127, 0, 63, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)'
-        ]
-        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-      }
-
-      function changeRadius() {
-        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+        gradient = gradient == 180 ? 0 : 180;
+        map.data.setStyle(styleFeature);
       }
 
       function changeOpacity() {
-        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        opacity = opacity == 0.2 ? 0.75 : 0.2;
+        map.data.setStyle(styleFeature);
       }
       socket.on('setGsonData', function (data) {
         map.data.forEach(function(feature) {
@@ -101,16 +84,4 @@
 
       socket.on('intiPolygon', function (data){
         map.data.addGeoJson(data);
-      })
-
-      socket.on('setData', function (data) {
-        let result = []
-        data.map((elem)=>{result.push({location: new google.maps.LatLng(elem.lat,elem.lng), weight: elem.weight})})
-        if(heatmap)
-          heatmap.setMap(null)
-        heatmap = new google.maps.visualization.HeatmapLayer({
-          data: result,
-          map: map,
-          radius: 25  
-        });
       })
