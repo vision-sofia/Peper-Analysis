@@ -127,6 +127,13 @@ section, header, footer {
 	margin-bottom: 20px;
 }
 
+#but {
+	border-radius: 0 50px 50px 0;
+	position: relative;
+	margin: 0;
+	margin-left: -4px;
+}
+
 .feature {
 	/*display: flex;
 	justify-content: center;*/
@@ -270,5 +277,11 @@ footer {
 @media (max-width: 767px) {
 	#map {
 		height: 500px;
+	}
+
+	#but {
+		margin: 10px 0 0 0;
+		width: 100%;
+		border-radius: 100px;
 	}
 }
