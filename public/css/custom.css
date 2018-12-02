@@ -1,26 +1,120 @@
-/***************************
-Add your custom styles below
-****************************/
-
-.lead {
-	font-size: 20px;
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
 body {
 	background: #303030;
 }
 
+a {
+	text-decoration: none !important;
+}
+
+section {
+	margin: 20px 0;
+}
+
+section, header, footer {
+	border: 1px solid #bb5042;
+}
+
+.fonts-regular {
+	font-family: "freightsans_regular", sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 12px;
+}
+
+/* HEADER */
+.page-header {
+  margin: 0;
+  padding: 0;
+  display: block;
+  border-bottom: 1px solid #bb5042;
+}
+
+#nav {
+  background: none;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+#cover-image {
+  display: block;
+  width: 100% !important;
+  height: auto;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-mobile-br {
+  display: none !important;
+}
+
+.logo-img {
+  max-width: 100%;
+}
+
+.logo-mobile {
+  display: none !important;
+}
+
+#nav p {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+  width: 120px;
+  font-size: 16px;
+}
+
+#nav p.logo {
+  width: 300px;
+  margin: 0;
+}
+
+.alpha {
+  margin-left: 0 !important;
+}
+
+.omega {
+  margin-right: 0 !important;
+}
+
+#nav a img {
+  float: left;
+  margin: 0;
+}
+
+#nav a {
+  padding-bottom: 5px;
+  display: block;
+  cursor: pointer;
+  color: #bb5042;
+}
+
+.underline {
+  border-bottom: 1px solid;
+}
+
+.underline:hover {
+  opacity: .65;
+  border-bottom: 1px solid;
+}
+
+/* MAIN */
+
 .page-border {
   margin: 20px;
   background: #303030;
 }
 
-.logo {
-	max-height: 100% !important;
-}
-
-#map-section {
-	margin: 20px 0;
+#map-holder {
+	padding: 20px;
 }
 
 #map {
@@ -34,6 +128,8 @@ body {
 }
 
 .filters {
+	width: 70%;
+	margin: 0 auto !important;
 	height: 300px;
 	overflow: auto;
 }
@@ -42,7 +138,111 @@ body {
 	margin-bottom: 10px;
 }
 
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+.filters li a {
+	width: 100%;
+}
+
+/* FOOTER */
+
+footer {
+	padding: 20px !important;
+}
+
+#copyright {
+	margin-top: 50px;
+}
+
+/* Clearfix */
+
+.clearfix::after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+  font-size: 0;
+}
+
+/*Media*/
+
+@media screen and (max-width: 1180px) {
+	/* HEADER */
+
+	#nav p {
+	width: 108px;
+	}
+	.logo-mobile {
+	display: none !important;
+	}
+	.logo-mobile-br {
+	display: none !important;
+	}
+	.logo-normal {
+	display: inline-block !important;
+	}
+}
+
+@media screen and (max-width: 1016px) {
+	/* HEADER */
+
+	#nav p {
+	width: 87px;
+	}
+	.logo-mobile {
+	display: none !important;
+	}
+	.logo-mobile-br {
+	display: none !important;
+	}
+	.logo-normal {
+	display: inline-block !important;
+	}
+}
+
+@media screen and (max-width: 898px) {
+	/* HEADER */
+
+	#nav p, #nav p.alpha, #nav p.omega {
+	margin: 0;
+	}
+	#nav p {
+	width: auto;
+	font-size: 18px;
+	word-spacing: 1px;
+	line-height: 32px;
+	}
+	#nav a {
+	padding: 0 3px;
+	border: none;
+	}
+	.nav-content {
+	width: 320px;
+	margin: 0 auto;
+	}
+	#nav p.logo {
+	margin-bottom: 15px;
+	width: 240px;
+	}
+	.logo-mobile {
+	display: inline-block !important;
+	}
+	.logo-mobile-br {
+	display: block !important;
+	}
+	.logo-normal {
+	display: none !important;
+	}
+	.underline {
+	border: 0 !important;
+	}
+	#nav p.text-left, #nav p.text-right {
+	text-align: center !important;
+	}
+}
+
+@media (max-width: 767px) {
+	#map {
+		height: 500px;
+	}
 }

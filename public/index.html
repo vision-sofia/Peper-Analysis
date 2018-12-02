@@ -11,47 +11,50 @@
         <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all"/>
         <link href="css/theme-darkred.css" rel="stylesheet" type="text/css" media="all"/>
         <link href="css/custom.css" rel="stylesheet" type="text/css" media="all"/>
-        <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+		<link href="img/logo3.png" rel="icon"/>
 		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script src="js/map.js"></script>
     </head>
     <body data-reveal-selectors="section:not(.masonry):not(:first-of-type):not(.parallax)">
 		<div class="page-border">
-			<div class="nav-container">
-				<nav>
-					<div class="nav-bar bg--dark" data-fixed-at="700">
-						<div class="nav-module logo-module left">
-							<a href="#">
-								<img alt="logo" class="logo logo-dark" src="img/logo11.png">
-								<img alt="logo" class="logo logo-light" src="img/logo11.png">
+			<header class="page-header bg--dark text-center">
+				<nav id="nav">
+					<div class="nav-content fonts-regular" data-fixed-at="700">
+						<p class="logo logo-mobile">
+							<a href="#" title="Peper Analysis">
+								<img class="logo-img" src="img/logo12.png" alt="Peper Analysis"/>
 							</a>
-						</div>
-						<div class="nav-module menu-module">
-							<ul class="menu">
-								<li>
-									<a href="#mapka">Mapka</a>
-								</li>
-								<li>
-									<a href="#about">About</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="nav-mobile-toggle visible-sm visible-xs">
-						<i class="icon-Align-JustifyAll icon icon--sm"></i>
+						</p>
+			
+						<br class="logo-mobile-br"/>
+			
+						<p class="text-left alpha">
+							<a class="underline" href="#mapka">Mapka</a>
+						</p>
+			
+						<p class="logo logo-normal">
+							<a href="#" title="Peper Analysis">
+								<img class="logo-img" src="img/logo12.png" alt="Peper Analysis"/>
+							</a>
+						</p>
+			
+						<p class="text-right omega">
+							<a class="underline" href="#about">About</a>
+						</p>
 					</div>
 				</nav>
-			</div>
+			</header>
 
 			<div class="main-container">
 				<a name="mapka"></a>
-				<section id="map-section" class="imageblock bg--dark">
-					<div class="imageblock__content col-sm-8 col-md-9 pos-right">
+				<section class="imageblock bg--dark">
+					<div id="map-holder" class="imageblock__content col-sm-8 col-md-9 pos-right">
 						<div id="map"></div>
 					</div>
 					<div class="col-sm-4 col-md-3">
 						<div class="feature feature-1 service-1 text-center">
-							<h4>Filters</h4>
+							<h3>Filters</h3>
 							<ul class="filters">							
 								<li>
 									<a class="btn btn--primary" href="#" onclick="toggleHeatmap()">
@@ -100,16 +103,6 @@
 										</span>
 									</a>
 								</li>
-								
-								<em>Gyms</em>
-								<li>
-									<a class="btn btn--primary" href="#">
-										<span class="btn__text">
-											<i class="icon icon-Fingerprint-2"></i>
-											Show sth
-										</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -139,20 +132,17 @@
 				
 				<footer class="footer-3 bg--dark text-center-xs text-center">
 					<div class="col-sm-3">
-						<img alt="logo" class="logo" src="img/logo11.png">
+						<a href="#" title="Peper Analysis">
+								<img class="logo-img" src="img/logo12.png" alt="Peper Analysis"/>
+						</a>
 					</div>
-					<div class="col-sm-6 text-center">
-						<ul class="footer__navigation">
-							<li>
-								<a href="#">About</a>
-							</li>
-						</ul>
+					<div id="copyright" class="col-sm-6 text-center">
 						<span class="type--fine-print">© Copyright <span class="update-year">2018</span> Peper Analysis</span>
 					</div>
 					<div class="col-sm-3 text-right text-center-xs">
 						<ul class="social-list">
 							<li>
-								<a href="https://github.com/kall0m/Peper-Analysis" target="_blank"><i class="socicon-github"></i></a>
+								<a href="https://github.com/vision-sofia/Peper-Analysis" target="_blank"><i class="socicon-github"></i></a>
 							</li>
 						</ul>
 					</div>
