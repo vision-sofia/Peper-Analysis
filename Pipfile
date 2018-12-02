@@ -13,6 +13,7 @@ seaborn = "*"
 nltk = "*"
 textblob = "*"
 gensim = "*"
+spacy = "*"
 scikit-learn = "*"
 jupyter = "*"
 

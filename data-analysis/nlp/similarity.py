@@ -1,7 +1,10 @@
 from nltk.corpus import wordnet as wn
+import spacy
+nlp = spacy.load("en_core_web_lg")
 
 __all__ = [
     "noun_syncheck",
+    "word2vec_similarity",
 ]
 
 
@@ -17,3 +20,7 @@ def noun_syncheck(wordA, wordB):
             best_score = score if best_score < score else best_score
 
     return best_score
+
+
+def word2vec_similarity(docA, docB):
+    return nlp(docA).similarity(nlp(docB))
