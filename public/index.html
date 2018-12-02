@@ -53,11 +53,17 @@
 						<div id="map"></div>
 					</div>
 					<div class="col-sm-4 col-md-3">
+						<div id="search">
+							<form class="form--merge">
+								<input class="col-md-8 col-sm-7" type="search" name="search" placeholder="Search...">
+								<button class="col-md-4 col-sm-5 btn btn--primary vpe" type="submit">Go</button>
+							</form>
+						</div>
 						<div class="feature feature-1 service-1 text-center">
 							<h3>Filters</h3>
 							<ul class="filters">							
 								<li>
-									<a class="btn btn--primary" href="#" onclick="toggleHeatmap()">
+									<a class="btn btn--primary" onclick="toggleHeatmap()">
 										<span class="btn__text">
 											Toggle Heatmap
 										</span>
@@ -65,7 +71,7 @@
 								</li>
 								
 								<li>
-									<a class="btn btn--primary" href="#" onclick="changeGradient()">
+									<a class="btn btn--primary" onclick="changeGradient()">
 										<span class="btn__text">
 											Change gradient
 										</span>
@@ -73,15 +79,7 @@
 								</li>
 								
 								<li>
-									<a class="btn btn--primary" href="#" onclick="changeRadius()">
-										<span class="btn__text">
-											Change radius
-										</span>
-									</a>
-								</li>
-								
-								<li>
-									<a class="btn btn--primary" href="#" onclick="changeOpacity()">
+									<a class="btn btn--primary" onclick="changeOpacity()">
 										<span class="btn__text">
 											Change opacity
 										</span>
@@ -95,7 +93,7 @@
 									</a>
 								</li>
 								<li>
-									<a id="3" class="btn btn--primary" href="#" onclick="changePolygon(this.id)">
+									<a id="3" class="btn btn--primary" onclick="changePolygon(this.id)">
 										<span class="btn__text">
 											3
 										</span>
@@ -103,7 +101,7 @@
 								</li>
 								
 								<li>
-									<a id="4" class="btn btn--primary" href="#" onclick="changePolygon(this.id)">
+									<a id="4" class="btn btn--primary" onclick="changePolygon(this.id)">
 										<span class="btn__text">
 											4
 										</span>
@@ -160,7 +158,8 @@
 		<script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/scrollreveal.min.js"></script>
         <script src="js/parallax.js"></script>
-        <script src="js/scripts.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/custom.js"></script>
 		<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxn2Fab9g6ks--ZZAnPxm68_X7ekrACeU&libraries=visualization&callback=initMap">
 		</script>
