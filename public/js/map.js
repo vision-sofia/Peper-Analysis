@@ -1,8 +1,4 @@
 
-      // This example requires the Visualization library. Include the libraries=visualization
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
-
       var map, heatmap;
       var socket = io();  
       function initMap() {
@@ -18,41 +14,39 @@
       }
       
       function styleFeature(feature) {
-        var high = [5, 69, 54];
-        var low = [151, 83, 34];
 
         // delta represents where the value sits between the min and max
         var delta = feature.getProperty('weight');
 
-        var color = [];
-        for (var i = 0; i < 3; i++) {
-          // calculate an integer color based on the delta
-          color[i] = (high[i] - low[i]) * delta + low[i];
-        }
+        
 
         // determine whether to show this shape or not
-        var showRow = true;
+        var showRun = 0.75;
         if (feature.getProperty('weight') == null ||
-            isNaN(feature.getProperty('weight')) || feature.getProperty('weight') == "") {
-          showRow = false;
+            isNaN(feature.getProperty('weight')) || 
+            feature.getProperty('weight') == "") {
+          showRun = 0.1;
+          delta = 0;
         }
 
          var outlineWeight = 0.5, zIndex = 1;
         // if (feature.getProperty('state') === 'hover') {
         //   outlineWeight = zIndex = 2;
         // }
-        console.log(color)
+        //console.log(color)
         return {
           strokeWeight: outlineWeight,
           strokeColor: '#fff',
           zIndex: zIndex,
-          fillColor: 'hsl(' + color[0] + ',' + color[1] + '%,' + color[2] + '%)',
-          fillOpacity: 0.75,
-          visible: showRow
+          fillColor: 'hsl(' + (delta * 180 + 180) + ',' + 100 + '%,' + 50 + '%)',
+          fillOpacity: showRun,
+          //visible: showRow
         };
 
       }
-
+      function search(){
+        socket.emit('request_analysis', "friendly neighbourhood")
+      }
       function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
       }
@@ -91,16 +85,18 @@
       }
       socket.on('setGsonData', function (data) {
         map.data.forEach(function(feature) {
-          feature.setProperty('weight', "");
+          feature.setProperty('weight', 0);
         })
-        data.map((el) => {
+       
+        for(let el in data){
+          //console.log(el);
           map.data.forEach(function(feature) {
-            if(feature.getProperty('X') == el.lat &&
-                feature.getProperty('Y') == el.lng){
-                  feature.setProperty('weight', el.weight)
-                }
+            if(feature.getProperty('RegName') == el){
+                //console.log('change');
+                  feature.setProperty('weight', data[el])
+            }
           })
-        })
+        }
       })
 
       socket.on('intiPolygon', function (data){

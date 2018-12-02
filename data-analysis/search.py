@@ -30,7 +30,7 @@ if __name__ == "__main__":
     user_input = sys.argv[1:]
     text = ' '.join(user_input)
     tags = get_search_tags(text, verbose=False)
-    print("Search Tags:", tags)
+    # print("Search Tags:", tags)
 
     json_objects = []
 
