@@ -18,9 +18,13 @@ from selenium import webdriver
 URL_PATTERN = 'http(s)?:\/\/.?(www\.)?tripadvisor\.(com|de)\/Restaurant.*'
 
 class Review():
-    def __init__(self, id, date, title, user, text):
+    def __init__(self, id, date, name, score, lat, lng, title, user, text):
         self.id = id
         self.date = date
+        self.name = name
+        self.score = score
+        self.lat = lat
+        self.lng = lng
         self.title = title
         self.user = user
         self.text = text
@@ -55,6 +59,10 @@ class TripadvisorScraper():
 
     def _parse_page(self):
         reviews = []
+        name = self.driver.find_element_by_id('HEADING').text.replace('\n', '')
+        score = 100 * float(self.driver.find_element_by_class_name("ui_bubble_rating").get_attribute("content")) / 5
+        lat = self.driver.execute_script("return window.map0Div.lat")
+        lng = self.driver.execute_script("return window.map0Div.lng")
         try:
             self.driver.find_element_by_xpath('//span[contains(., "{}") and @class="taLnk ulBlueLinks"]'.format(self.i18n[self.language]['more_btn'])).click()
         except:
@@ -63,7 +71,7 @@ class TripadvisorScraper():
         time.sleep(1)
 
         review_elements = self.driver.find_elements_by_class_name('reviewSelector')
-        for i, e in enumerate(review_elements):
+        for e in review_elements:
             try:
                 id = e.get_attribute('id')
                 date = e.find_element_by_class_name('ratingDate').get_attribute('title')
@@ -75,12 +83,11 @@ class TripadvisorScraper():
                 except:
                     user = None
                 text = e.find_element_by_class_name('partial_entry').text.replace('\n', '')
-
                 if id in self.lookup:
                     logging.warning('Fetched review {} twice.'.format(r.id))
                 else:
                     self.lookup[id] = True
-                    reviews.append(Review(id, date, title, user, text))
+                    reviews.append(Review(id, date, name, score, lat, lng, title, user, text))
             except:
                 logging.warning('Couldn\'t fetch review.')
                 pass
@@ -129,7 +136,7 @@ class TripadvisorScraper():
         if not is_valid_url(url): return logging.warning('Tripadvisor URL not valid.')
         self.driver.get(url)
 
-        time.sleep(1)
+        time.sleep(2)
 
         while len(reviews) < max_reviews:
             reviews += self._parse_page()
@@ -170,10 +177,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     scraper = TripadvisorScraper(engine=args.engine)
-    urls = scraper.get_urls(args.url)
+    urls = scraper.get_urls(args.url, 1)
     dfs = []
     for url in urls:
-        dfs.append(scraper.fetch_reviews(url, args.max))
+        dfs.append(scraper.fetch_reviews(url, 1)) #args.max
         # print('Successfully fetched {} reviews.'.format(len(dfs[-1].index)))
 
     dfs = pd.concat(dfs)
