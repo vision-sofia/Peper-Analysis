@@ -1,3 +1,6 @@
+import json
+import numpy as np
+
 from math import sqrt
 from collections import Counter
 
@@ -8,10 +11,28 @@ __all__ = [
     "noun_syncheck",
 
     "word2vec",
-    "cosdis",
+    "distance",
     "calc_similarity",
 ]
 
+
+with open('../data/review_vocab.json', 'r') as f:
+    cnt = f.read()
+    vocab = set(json.loads(cnt))
+
+words = {}
+i = 0
+with open('../data/glove.840B.300d.txt', 'r') as f:
+    for line in f:
+        splitted  = line.split()
+        word = splitted[0]
+        if(word not in vocab):
+            continue
+        try:
+            vec = np.array(list(map(float, splitted[1:])))
+            words[word] = vec            
+        except:
+            pass
 
 def noun_syncheck(wordA, wordB):
     syn_setA, syn_setB = wn.synsets(wordA), wn.synsets(wordB)
@@ -34,9 +55,10 @@ def word2vec(word):
 
     return cw, sw, lw
 
-def cosdis(v1, v2):
-    common = v1[1].intersection(v2[1])
-    return sum(v1[0][ch]*v2[0][ch] for ch in common)/v1[2]/v2[2]
+def distance(w1, w2):
+    v1 = words[w1]
+    v2 = words[w2]
+    return np.linalg.norm(np.subtract(v1, v2))
 
 def calc_similarity(wordA, wordB):
-    return cosdis(word2vec(wordA), word2vec(wordB))
+    return distance(word2vec(wordA), word2vec(wordB))
