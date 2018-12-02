@@ -2,10 +2,10 @@ const express = require('express')
 const app = require('express')()
 const port = 3000
 const parse = require('csv-parse')
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var fs = require('fs')
-
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const fs = require('fs')
+const python_shell = require('python-shell').PythonShell
 
 app.use(express.static('public'))
 app.get('/', (req, res) => {
@@ -20,6 +20,12 @@ io.on('connection', function(socket) {
     socket.on('polygon-change', function(id) {
         socket.emit('setGsonData', JSON.parse(fs.readFileSync(`./parsed_data/${id}.json`,'utf-8')))
         console.log("zdr");
+    })
+    socket.on('request_analysis', (string)=>{
+        python_shell.run('./data-analysis/search.py', {args: [string]}, function (err,res) {
+            if (err) throw err;
+            console.log(res);
+        });
     })
 });
 http.listen(port, function(){

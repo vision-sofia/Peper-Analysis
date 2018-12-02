@@ -21,6 +21,7 @@
     "express": "^4.16.4",
     "node-geocoder": "^3.22.0",
     "point-in-geopolygon": "^1.0.1",
+    "python-shell": "^1.0.6",
     "socket.io": "^2.2.0",
     "transform-coordinates": "^0.1.0"
   }

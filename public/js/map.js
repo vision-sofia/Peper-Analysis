@@ -44,7 +44,9 @@
         };
 
       }
-
+      function search(){
+        socket.emit('request_analysis', "friendly neighbourhood")
+      }
       function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
       }
