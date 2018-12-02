@@ -1,10 +1,9 @@
 from nltk.corpus import wordnet as wn
-import spacy
-nlp = spacy.load("en_core_web_lg")
+from gensim.models import Word2Vec
 
 __all__ = [
     "noun_syncheck",
-    "word2vec_similarity",
+    "get_most_similar_to",
 ]
 
 
@@ -22,5 +21,5 @@ def noun_syncheck(wordA, wordB):
     return best_score
 
 
-def word2vec_similarity(docA, docB):
-    return nlp(docA).similarity(nlp(docB))
+def get_most_similar_to(doc, corpus):
+    return Word2Vec(corpus).most_similar(doc, topn=5)
