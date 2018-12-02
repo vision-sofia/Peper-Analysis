@@ -129,3 +129,8 @@ node_modules
 # Google's word2vec
 /data/GoogleNews-vectors-negative300.bin.gz
 /data/GoogleNews-vectors-negative300.bin
+
+# Tripadvisor
+tripadvisor-scraper/geckodriver.exe
+tripadvisor-scraper/geckodriver.log
+tripadvisor-scraper/my_reviews.csv
