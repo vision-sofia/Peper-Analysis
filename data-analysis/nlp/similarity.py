@@ -1,7 +1,9 @@
 from nltk.corpus import wordnet as wn
+from gensim.models import Word2Vec
 
 __all__ = [
     "noun_syncheck",
+    "get_most_similar_to",
 ]
 
 
@@ -17,3 +19,7 @@ def noun_syncheck(wordA, wordB):
             best_score = score if best_score < score else best_score
 
     return best_score
+
+
+def get_most_similar_to(doc, corpus):
+    return Word2Vec(corpus).most_similar(doc, topn=5)
