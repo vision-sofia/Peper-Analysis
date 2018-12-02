@@ -56,7 +56,7 @@ io.on('connection', function(socket) {
             for(let el in result) {
                 result[el] /= c_max
             }
-            socket.emit('setData', result)
+            socket.emit('setGsonData', result)
 
         });
         process.stdout.on('data', function (data) {
