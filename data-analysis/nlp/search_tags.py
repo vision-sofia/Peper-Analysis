@@ -16,12 +16,11 @@ def extract_tags(data):
 
     tags = []
     for phrase in raw_data:
-        skip = False
         res = ''
         for word in phrase:
             res += word[0] + ' '
 
-        if len(res) > 0 and not skip:
+        if len(res) > 0 :
             tags.append(res[:-1])
 
     return tags
@@ -30,7 +29,7 @@ def get_search_tags(a, verbose=False):
     if verbose:
         print()
         print('-'*100)
-        print("\tRunning `get_cat_tags`...")
+        print("\tRunning `get_search_tags`...")
         print('-'*100)
 
     clf_tag_parser = RegexpParser(

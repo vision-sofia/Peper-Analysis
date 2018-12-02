@@ -17,18 +17,14 @@ sofia_airbnb = pd.read_csv("./data/sofia_airbnb_reviews.csv")
 
 def analyse_by(user_input, loc):
     scores = []
-    reviews = json.loads(loc[2])
+    topics = json.loads(loc["topics"])
 
-    for review in reviews:
-        main_topic = ' '.join(
-            TopicModelling(review, passes=100, iterations=200).get_topics()[0]
-        )
+    for topic in topics:
         scores.append(
-            calc_similarity(user_input, main_topic)
+            calc_similarity(user_input, topic)
         )
-        break
 
-    return scores[0]
+    return mean(scores)
 
 if __name__ == "__main__":
     user_input = sys.argv[1:]
@@ -38,12 +34,12 @@ if __name__ == "__main__":
 
     json_objects = []
 
-    for loc in sofia_airbnb.values:
+    for index, loc in sofia_airbnb.iterrows():
         json_objects.append(
             {
-                "lat": loc[0],
-                "long": loc[1],
-                "score": analyse_by(' '.join(tags), loc),
+                "lat": loc["lat"],
+                "long": loc["long"],
+                "weight": analyse_by(' '.join(tags), loc),
             }
         )
 
