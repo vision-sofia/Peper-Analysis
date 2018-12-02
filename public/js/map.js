@@ -3,6 +3,7 @@
       var heatmap_vissible = true;
       var opacity = 0.75, gradient = 0;
       var socket = io();  
+      
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 13,
@@ -47,9 +48,7 @@
         };
 
       }
-      function search(){
-        socket.emit('request_analysis', "friendly neighbourhood")
-      }
+     
       function toggleHeatmap() {
         heatmap_vissible ^= 1;
         map.data.setStyle(styleFeature);
