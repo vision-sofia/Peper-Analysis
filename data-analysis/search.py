@@ -17,12 +17,19 @@ sofia_airbnb = pd.read_csv("./data/sofia_airbnb_reviews.csv")
 
 def analyse_by(user_input, loc):
     scores = []
-    topics = json.loads(loc["topics"])
+    # topics = json.loads(loc["topics"])
 
-    for topic in topics:
+    # for topic in topics:
+    #     scores.append(
+    #         calc_similarity(user_input, topic)
+    #     )
+
+    for review in json.loads(loc["reviews"]):
+        main_topic = ' '.join(TopicModelling(review, passes=10, iterations=20).get_topics()[0])
         scores.append(
-            calc_similarity(user_input, topic)
+            calc_similarity(user_input, main_topic)
         )
+        break
 
     return mean(scores)
 

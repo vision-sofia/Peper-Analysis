@@ -5,7 +5,9 @@ const parse = require('csv-parse')
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs')
-const python_shell = require('python-shell').PythonShell
+const spawn = require("child_process").spawn;
+const path = require('path');
+
 
 app.use(express.static('public'))
 app.get('/', (req, res) => {
@@ -22,9 +24,13 @@ io.on('connection', function(socket) {
         console.log("zdr");
     })
     socket.on('request_analysis', (string)=>{
-        python_shell.run('./data-analysis/search.py', {args: [string]}, function (err,res) {
-            if (err) throw err;
-            console.log(res);
+        // console.log("in");
+
+        var process = spawn('/Users/victor/.local/share/virtualenvs/Peper-Analysis-eBzTI8A5/bin/python',
+        [path.join(__dirname, "./data-analysis/search.py"), string])
+
+        process.stdout.on('data', function (data) {
+            console.log(data.toString())
         });
     })
 });
