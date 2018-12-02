@@ -136,7 +136,7 @@ class TripadvisorScraper():
         if not is_valid_url(url): return logging.warning('Tripadvisor URL not valid.')
         self.driver.get(url)
 
-        time.sleep(2)
+        time.sleep(1)
 
         while len(reviews) < max_reviews:
             reviews += self._parse_page()
@@ -177,10 +177,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     scraper = TripadvisorScraper(engine=args.engine)
-    urls = scraper.get_urls(args.url, 1)
+    urls = scraper.get_urls(args.url)
     dfs = []
     for url in urls:
-        dfs.append(scraper.fetch_reviews(url, 1)) #args.max
+        dfs.append(scraper.fetch_reviews(url, args.max))
         # print('Successfully fetched {} reviews.'.format(len(dfs[-1].index)))
 
     dfs = pd.concat(dfs)
