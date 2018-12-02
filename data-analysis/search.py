@@ -25,7 +25,7 @@ def analyse_by(user_input, loc):
     #     )
 
     for review in json.loads(loc["reviews"]):
-        main_topic = ' '.join(TopicModelling(review, passes=10, iterations=20).get_topics()[0])
+        main_topic = ' '.join(TopicModelling(review, passes=1, iterations=1).get_topics()[0])
         scores.append(
             calc_similarity(user_input, main_topic)
         )
@@ -45,10 +45,10 @@ if __name__ == "__main__":
         json_objects.append(
             {
                 "lat": loc["lat"],
-                "long": loc["long"],
+                "lng": loc["long"],
                 "weight": analyse_by(' '.join(tags), loc),
             }
         )
 
-    pprint(json_objects)
+    print(json.dumps(json_objects))
     json.dump(json_objects, open("./parsed_data/res.json", mode="w"))

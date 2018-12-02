@@ -104,6 +104,7 @@
       })
 
       socket.on('setData', function (data) {
+        console.log(data)
         let result = []
         data.map((elem)=>{result.push({location: new google.maps.LatLng(elem.lat,elem.lng), weight: elem.weight})})
         if(heatmap)
