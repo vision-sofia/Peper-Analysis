@@ -2,7 +2,7 @@
 Install selenium and pandas using pip
 Install PhantomJS or get Chrome- or Firefox webdriver binaries and add them to your PATH (see http://selenium-python.readthedocs.io/installation.html#drivers)
         
-        python tripadvisior.py -e firefox -n 10 -o my_reviews.csv https://www.tripadvisor.com/Restaurants-g294452-Sofia_Sofia_Region.html
+        python tripadvisior_restaurants.py -e firefox -n 10 -o my_restaurants_reviews.csv https://www.tripadvisor.com/Restaurants-g294452-Sofia_Sofia_Region.html
 '''
 import argparse
 import datetime
@@ -15,7 +15,7 @@ import time
 import pandas as pd
 from selenium import webdriver
 
-URL_PATTERN = 'http(s)?:\/\/.?(www\.)?tripadvisor\.(com|de)\/Restaurant.*'
+URL_PATTERN = 'http(s)?:\/\/.?(www\.)?tripadvisor\.(com|de)\/(Restaurant|Hotel).*'
 
 class Review():
     def __init__(self, id, date, name, score, lat, lng, title, user, text):
@@ -60,7 +60,6 @@ class TripadvisorScraper():
     def _parse_page(self):
         reviews = []
         name = self.driver.find_element_by_id('HEADING').text.replace('\n', '')
-        score = 100 * float(self.driver.find_element_by_class_name("ui_bubble_rating").get_attribute("content")) / 5
         lat = self.driver.execute_script("return window.map0Div.lat")
         lng = self.driver.execute_script("return window.map0Div.lng")
         try:
@@ -83,6 +82,15 @@ class TripadvisorScraper():
                 except:
                     user = None
                 text = e.find_element_by_class_name('partial_entry').text.replace('\n', '')
+                score = self.driver.find_element_by_class_name('reviewItemInline')
+                score = score.find_element_by_class_name('ui_bubble_rating')
+                if 'bubble_50' in score.get_attribute('class'): score = 100
+                elif 'bubble_40' in score.get_attribute('class'): score = 80
+                elif 'bubble_30' in score.get_attribute('class'): score = 60
+                elif 'bubble_20' in score.get_attribute('class'): score = 40
+                elif 'bubble_10' in score.get_attribute('class'): score = 20
+                else: score = 0
+
                 if id in self.lookup:
                     logging.warning('Fetched review {} twice.'.format(r.id))
                 else:
@@ -121,7 +129,9 @@ class TripadvisorScraper():
                 if href:
                     urls.append(href)
 
-            next_button_container = self.driver.find_element_by_class_name('next')
+            try:
+                next_button_container = self.driver.find_element_by_class_name('next')
+            except: break
             if 'disabled' in next_button_container.get_attribute('class'): break
             next_button_container.click()
 
@@ -139,9 +149,12 @@ class TripadvisorScraper():
         time.sleep(1)
 
         while len(reviews) < max_reviews:
+            time.sleep(1)
             reviews += self._parse_page()
             logging.info('Fetched a total of {} reviews by now.'.format(len(reviews)))
-            next_button_container = self.driver.find_element_by_class_name('next')
+            try:
+                next_button_container = self.driver.find_element_by_class_name('next')
+            except: break
             if 'disabled' in next_button_container.get_attribute('class'): break
             next_button_container.click()
 
@@ -177,7 +190,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     scraper = TripadvisorScraper(engine=args.engine)
-    urls = scraper.get_urls(args.url)
+    urls = scraper.get_urls(args.url, 40)
     dfs = []
     for url in urls:
         dfs.append(scraper.fetch_reviews(url, args.max))
