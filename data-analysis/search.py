@@ -1,5 +1,6 @@
 import sys
 import json
+from pprint import pprint
 from statistics import mean
 
 import pandas as pd
@@ -19,7 +20,9 @@ def analyse_by(user_input, loc):
     reviews = json.loads(loc[2])
 
     for review in reviews:
-        main_topic = ' '.join(TopicModelling(review).get_topics()[0])
+        main_topic = ' '.join(
+            TopicModelling(review, passes=200, iterations=400).get_topics()[0]
+        )
         scores.append(
             calc_similarity(user_input, main_topic)
         )
@@ -44,4 +47,5 @@ if __name__ == "__main__":
             }
         )
 
+    pprint(json_objects)
     json.dump(json_objects, open("./parsed_data/res.json", mode="w"))
