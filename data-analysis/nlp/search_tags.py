@@ -36,7 +36,7 @@ def get_search_tags(a, verbose=False):
     clf_tag_parser = RegexpParser(
         "STAG: {\
             (<NN>|<NNS>|<NNP>|<NNPS>)?\
-            (<JJ>|<JJR>|<JJS>)+\
+            (<JJ>|<JJR>|<JJS>|<RB>)+\
             (<CC>(<JJ>|<JJR>|<JJS>))?\
             (<NN>|<NNS>|<NNP>|<NNPS>)?\
         }"

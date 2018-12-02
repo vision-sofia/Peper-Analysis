@@ -21,7 +21,7 @@ def analyse_by(user_input, loc):
 
     for review in reviews:
         main_topic = ' '.join(
-            TopicModelling(review, passes=200, iterations=400).get_topics()[0]
+            TopicModelling(review, passes=100, iterations=200).get_topics()[0]
         )
         scores.append(
             calc_similarity(user_input, main_topic)
@@ -33,7 +33,7 @@ def analyse_by(user_input, loc):
 if __name__ == "__main__":
     user_input = sys.argv[1:]
     text = ' '.join(user_input)
-    tags = get_search_tags(text)
+    tags = get_search_tags(text, verbose=False)
     print("Search Tags:", tags)
 
     json_objects = []
