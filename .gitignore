@@ -126,6 +126,7 @@ dmypy.json
 # Node Modules
 node_modules
 
+# Tripadvisor
 tripadvisor-scraper/geckodriver.exe
 tripadvisor-scraper/geckodriver.log
 tripadvisor-scraper/my_reviews.csv
