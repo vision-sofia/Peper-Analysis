@@ -1,13 +1,12 @@
 const express = require('express') 
 const app = require('express')()
 const port = 3000
-const parse = require('csv-parse')
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs')
 const spawn = require("child_process").spawn;
 const path = require('path');
-var inside = require('point-in-geopolygon');
+const inside = require('point-in-geopolygon');
 
 app.use(express.static('public'))
 app.get('/', (req, res) => {

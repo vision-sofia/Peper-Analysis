@@ -1,6 +1,5 @@
 import sys
 import json
-from pprint import pprint
 from statistics import mean
 
 import pandas as pd
@@ -17,9 +16,8 @@ sofia_airbnb = pd.read_csv("./data/sofia_airbnb_reviews.csv")
 
 def analyse_by(user_input, loc):
     scores = []
-    # topics = json.loads(loc["topics"])
 
-    # for topic in topics:
+    # for topic in eval(loc["topics"]):
     #     scores.append(
     #         calc_similarity(user_input, topic)
     #     )
@@ -53,4 +51,4 @@ if __name__ == "__main__":
         )
 
     print(json.dumps(json_objects))
-    json.dump(json_objects, open("./parsed_data/res.json", mode="w"))
+    json.dump(json_objects, open("./parsed_data/res.json", mode='w'))

@@ -5,16 +5,16 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+jupyter = "*"
+seaborn = "*"
+scikit-learn = "*"
 
 [packages]
 numpy = "*"
 pandas = "*"
-seaborn = "*"
 nltk = "*"
 textblob = "*"
 gensim = "*"
-scikit-learn = "*"
-jupyter = "*"
 
 [requires]
 python_version = "3.7"
