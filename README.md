@@ -18,7 +18,7 @@ to run the app.
     npm install
     ```
 3) Now, that we are done with JavaScript's dependencies, lets continue with Python's.
-Of course you will need to download the Python programming language. Click [here](https://www.python.org/ftp/python/3.7.2/python-3.7.2-macosx10.9.pkg) to do so.
+Of course you will need to download the Python programming language. You can do so from [here](https://www.python.org/downloads/release/python-372/).
 4) Now, because we are using virtual environment to manage our dependencies, you will need to download `Pipenv`.
 <br> Check out [here](https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv) to understand how to do so.
 5) Once you have installed `Pipenv` you are ready to install the requirements specified in the `Pipfile`.
