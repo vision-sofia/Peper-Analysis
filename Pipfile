@@ -3,18 +3,17 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
-pylint = "*"
-jupyter = "*"
-seaborn = "*"
-scikit-learn = "*"
-
 [packages]
 numpy = "*"
 pandas = "*"
 nltk = "*"
 textblob = "*"
 gensim = "*"
+
+[dev-packages]
+pylint = "*"
+jupyter = "*"
+seaborn = "*"
 
 [requires]
 python_version = "3.7"
