@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kall0m/Peper-Analysis.git"
+    "url": "git+https://github.com/VIVelev/Peper-Analysis.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kall0m/Peper-Analysis/issues"
+    "url": "https://github.com/VIVelev/Peper-Analysis/issues"
   },
-  "homepage": "https://github.com/kall0m/Peper-Analysis#readme",
+  "homepage": "https://github.com/VIVelev/Peper-Analysis#readme",
   "dependencies": {
     "express": "^4.16.4",
     "socket.io": "^2.2.0",
