@@ -1,4 +1,7 @@
 # Peper-Analysis
+![Peper-Analysis_logo](./public/img/logo10.png)
+
+An intelligent analyzer and visualizer of natural language reviews from [AirBNB](https://www.airbnb.com) and [TripAdvisor](https://www.tripadvisor.com).
 
 ## How to install and run the app?
 We are using Python and JavaScript as main programming languages, so we will have to setup both sides in order
