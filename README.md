@@ -21,7 +21,7 @@ to run the app.
 Of course you will need to download the Python programming language. Click [here](https://www.python.org/ftp/python/3.7.2/python-3.7.2-macosx10.9.pkg) to do so.
 4) Now, because we are using virtual environment to manage our dependencies, you will need to download `Pipenv`.
 <br> Check out [here](https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv) to understand how to do so.
-5) Once you have installed `Pipenv` you are ready to install the requirements.
+5) Once you have installed `Pipenv` you are ready to install the requirements specified in the `Pipfile`.
 <br>Navigate to the root directory of the project and run the following:
     ```bash
     pipenv install
@@ -30,7 +30,20 @@ Of course you will need to download the Python programming language. Click [here
 
 ### Running
 
-Coming soon...
+* Navigate to the root directory of the project and run the following:
+    ```bash
+    node index.js [path_to_the_python_executable]
+    ```
+
+* You can get your `path_to_the_python_executable` by running:
+    ```bash
+    pipenv --venv
+    ```
+This will return a path, add `/bin/python` to this path and this whole string pass to `node index.js`.
+* For a shortcut you can try running this:
+    ```bash
+    node index.js $(pipenv --venv)/bin/python
+    ```
 
 ## Built With
 
